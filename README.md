@@ -12,7 +12,7 @@ Technologies Used
 Steps to start
 -----------------------------------------------
 1. Server App Starts with CctestApplication.java file
-2. Running npm start from "web" folder to start front end. 
+2. Run npm install,  npm start from "web" folder to start front end. 
 
 <b>Assumptions and Implementation Details</b>
 1. Have implemented one create and get apis.
