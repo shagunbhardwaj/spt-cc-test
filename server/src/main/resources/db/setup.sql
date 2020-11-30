@@ -15,5 +15,3 @@ create table CREDIT_CARD
 
 insert into CREDIT_CARD(card_owner_name, credit_card_number, account_limit, created_timestamp)
  values ('shagun', '4716305855684825',10.0,now());
-
- --commit;

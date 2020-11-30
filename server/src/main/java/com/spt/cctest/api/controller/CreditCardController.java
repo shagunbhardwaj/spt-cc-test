@@ -33,7 +33,7 @@ public class CreditCardController {
     /**
      * Add a new credit card
      * @param creditCard
-     * @return
+     * @return updated credit card with id , timestamp and balance set to 0
      */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CreditCard> createCreditCard(@Valid @RequestBody CreditCard creditCard) {
@@ -43,8 +43,7 @@ public class CreditCardController {
     }
 
     /**
-     * Return list of all credit cards
-     * @return
+     * @return Return list of all credit cards
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CreditCard>> getCreditCards() {
