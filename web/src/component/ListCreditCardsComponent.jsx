@@ -1,12 +1,17 @@
 import  React, { Component } from 'react';
-import CreditCardDataService from "../service/CreditCardDataService";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import CreditCardDataService from "../service/CreditCardDataService";
 
 class ListCreditCardsComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            creditCards: []
+            creditCards: [],
+            id: '',
+            cardOwnerName: '',
+            creditCardNumber: '',
+            accountLimit: '',
+            msg: ''
         }
         this.refreshCreditCards = this.refreshCreditCards.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -42,6 +47,13 @@ class ListCreditCardsComponent extends Component {
                     this.refreshCreditCards()
                 }
             )
+            .catch(error => {
+                console.log('Got error from api')
+                if (typeof error.response.data === "object")
+                    this.setState({msg: error.response.data.details[0]})
+                else
+                    this.setState({msg: error.response.data})
+            })
     }
 
     validate(values) {
@@ -53,7 +65,6 @@ class ListCreditCardsComponent extends Component {
         } else if ( !values.accountLimit.amount || values.accountLimit.amount < 0 ) {
             errors.description = 'Enter valid card limit with positive value only'
         }
-        console.log('show errors')
         console.log(errors)
         return errors
     }
@@ -64,6 +75,7 @@ class ListCreditCardsComponent extends Component {
             <div >
                 <h3>Credit Card System</h3>
                 <h4>Add</h4>
+                <div style={{color:"red"}}>{this.state.msg}</div>
                 <div className="container">
                     <Formik
                         initialValues={{ id, cardOwnerName,  creditCardNumber, accountLimit}}

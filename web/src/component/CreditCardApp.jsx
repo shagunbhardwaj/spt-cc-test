@@ -7,7 +7,10 @@ class CreditCardApp extends Component {
         return (
             <Router>
                 <>
-                    <ListCreditCardsComponent/>
+                    <Switch>
+                        <Route path="/" exact component={ListCreditCardsComponent} />
+                        <Route path="/creditcards" exact component={ListCreditCardsComponent} />
+                    </Switch>
                 </>
             </Router>
         )
