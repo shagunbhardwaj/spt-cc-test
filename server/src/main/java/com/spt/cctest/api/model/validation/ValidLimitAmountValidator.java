@@ -1,9 +1,11 @@
-package com.spt.cctest.api.model;
+package com.spt.cctest.api.model.validation;
 
 import java.math.BigDecimal;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import com.spt.cctest.api.model.Money;
 
 public class ValidLimitAmountValidator implements ConstraintValidator<ValidLimitAmount, Money> {
     @Override

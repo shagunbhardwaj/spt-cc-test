@@ -1,6 +1,4 @@
-package com.spt.cctest.api.model;
-
-import java.math.BigDecimal;
+package com.spt.cctest.api.model.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
