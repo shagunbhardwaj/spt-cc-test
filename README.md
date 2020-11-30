@@ -25,4 +25,6 @@ Steps to start
     <li>Default currency is £</li>
     <li>Default currency is £</li>
 </ul> 
-    
+3. API validation errors are displayed on UI. 
+4. UI input validation errors implemented but currently only visible in UI console. 
+Not displayed on UI.     

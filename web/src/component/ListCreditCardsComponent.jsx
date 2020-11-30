@@ -45,6 +45,7 @@ class ListCreditCardsComponent extends Component {
                 response => {
                     console.log(response)
                     this.refreshCreditCards()
+                    this.setState({msg: 'ADDED !!!'})
                 }
             )
             .catch(error => {
