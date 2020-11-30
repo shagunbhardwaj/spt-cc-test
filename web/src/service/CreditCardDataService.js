@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const CREDITCARD_API_URL = 'http://localhost:8080/creditcard'
+const CREDITCARD_API_URL = 'http://localhost:8080/creditcards'
 
 class CreditCardDataService {
 
@@ -12,7 +12,6 @@ class CreditCardDataService {
     retrieveAllCreditCards() {
         return axios.get(`${CREDITCARD_API_URL}`);
     }
-
 
 }
 

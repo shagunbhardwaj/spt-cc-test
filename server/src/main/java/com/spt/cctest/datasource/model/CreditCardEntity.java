@@ -2,6 +2,7 @@ package com.spt.cctest.datasource.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Table(
         name = "CREDIT_CARD",
-        uniqueConstraints = @UniqueConstraint(columnNames="CREDI_CARD_NUMBER")
+        uniqueConstraints = @UniqueConstraint(columnNames="CREDIT_CARD_NUMBER")
 )
 @Setter
 @Getter
@@ -30,7 +31,7 @@ public class CreditCardEntity {
     @Column(name = "CARD_OWNER_NAME")
     private String cardOwnerName;
 
-    @Column(name = "CREDI_CARD_NUMBER")
+    @Column(name = "CREDIT_CARD_NUMBER")
     private String creditCardNumber;
 
     @Column(name = "ACCOUNT_LIMIT")
@@ -46,8 +47,8 @@ public class CreditCardEntity {
     private Instant createdTimestamp;
 
     @PrePersist
-    public void setTimestamps() {
-        if (createdTimestamp == null) {
+    public void setValues() {
+        if (Objects.isNull(createdTimestamp)) {
             createdTimestamp = Instant.now();
         }
     }

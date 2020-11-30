@@ -1,23 +1,17 @@
 package com.spt.cctest.component.impl;
 
-import static java.util.Optional.ofNullable;
-
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import javax.print.attribute.standard.Destination;
-
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spt.cctest.api.model.CreditCard;
 import com.spt.cctest.api.model.Money;
-import com.spt.cctest.component.CreditCardComponent;
+import com.spt.cctest.component.CreditCardService;
 import com.spt.cctest.datasource.model.CreditCardEntity;
 import com.spt.cctest.datasource.repository.CreditCardRepository;
 
@@ -31,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class CreditCardComponentImpl implements CreditCardComponent {
+public class CreditCardServiceImpl implements CreditCardService {
 
     private final CreditCardRepository creditCardRepository;
     private final ModelMapper modelMapper;
@@ -55,7 +49,7 @@ public class CreditCardComponentImpl implements CreditCardComponent {
      * @return
      */
     @Override
-    public List<CreditCard> getAllCrediCards() {
+    public List<CreditCard> getAllCreditCards() {
 
         return creditCardRepository.findAll().stream()
                 .map(creditCardEntity -> {

@@ -6,10 +6,6 @@ class ListCreditCardsComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            id : null,
-            cardOwnerName : '',
-            creditCardNumber : '',
-            accountLimit: {amount : '', currency : '£'},
             creditCards: []
         }
         this.refreshCreditCards = this.refreshCreditCards.bind(this)
@@ -37,21 +33,25 @@ class ListCreditCardsComponent extends Component {
             cardOwnerName: values.cardOwnerName,
             creditCardNumber: values.creditCardNumber,
             accountLimit: {amount : values.accountLimit.amount, currency: '£'},
+            accountBalance: {amount : 0, currency: '£'}
         }
         CreditCardDataService.createCreditCard(creditCard)
-            .then(() => this.props.history.push('/'))
+            .then(
+                response => {
+                    console.log(response)
+                    this.refreshCreditCards()
+                }
+            )
     }
 
     validate(values) {
         let errors = {}
-        if (!values.cardOwnerName) {
-            errors.description = 'Enter a Name'
-        } else if (values.cardOwnerName.length < 3 || values.cardOwnerName.length > 255) {
-            errors.description = 'Name should have length from 3 - 255 characters'
-        } else if (!values.creditCardNumber || values.creditCardNumber.length < 13 || values.creditCardNumber.length > 19 ) {
-            errors.description = 'Enter Credit Card number with length 13 - 19 numbers'
+        if (!values.cardOwnerName || values.cardOwnerName.length < 3 || values.cardOwnerName.length > 255) {
+            errors.description = 'Enter Name with length between 3 - 255 characters'
+        } else if (!values.creditCardNumber || values.creditCardNumber.length < 11 || values.creditCardNumber.length > 19 ) {
+            errors.description = 'Enter Credit Card number with length between 11 - 19 numbers'
         } else if ( !values.accountLimit.amount || values.accountLimit.amount < 0 ) {
-            errors.description = 'Enter valid card limit'
+            errors.description = 'Enter valid card limit with positive value only'
         }
         console.log('show errors')
         console.log(errors)
@@ -119,8 +119,8 @@ class ListCreditCardsComponent extends Component {
                                         <td hidden={true}>{creditCard.id}</td>
                                         <td>{creditCard.cardOwnerName}</td>
                                         <td>{creditCard.creditCardNumber}</td>
-                                        <td>{creditCard.accountBalance.currency} {creditCard.accountBalance.money}</td>
-                                        <td>Put real</td>
+                                        <td>{creditCard.accountBalance.currency} {creditCard.accountBalance.amount}</td>
+                                        <td>{creditCard.accountLimit.currency} {creditCard.accountLimit.amount}</td>
                                     </tr>
                             )
                         }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,20 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spt.cctest.api.model.CreditCard;
-import com.spt.cctest.component.CreditCardComponent;
+import com.spt.cctest.component.CreditCardService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
-@RequestMapping("/creditcard")
+@RequestMapping("/creditcards")
 @Validated
 @RequiredArgsConstructor
 @Slf4j
 public class CreditCardController {
 
-    private final CreditCardComponent creditCardComponent;
+    private final CreditCardService creditCardService;
 
     /**
      * Add a new credit card
@@ -38,8 +37,8 @@ public class CreditCardController {
      */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CreditCard> createCreditCard(@Valid @RequestBody CreditCard creditCard) {
-        log.info("Starting Credit card create for {}", "cc");
-        creditCard = creditCardComponent.createCreditCard(creditCard);
+        log.info("Received request for creating card for {}", creditCard.getCardOwnerName());
+        creditCard = creditCardService.createCreditCard(creditCard);
         return ResponseEntity.ok(creditCard);
     }
 
@@ -49,7 +48,7 @@ public class CreditCardController {
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CreditCard>> getCreditCards() {
-        List<CreditCard> cards = creditCardComponent.getAllCrediCards();
+        List<CreditCard> cards = creditCardService.getAllCreditCards();
         return ResponseEntity.ok(cards);
     }
 

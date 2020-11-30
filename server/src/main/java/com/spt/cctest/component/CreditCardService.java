@@ -6,7 +6,7 @@ import java.util.UUID;
 import com.spt.cctest.api.model.CreditCard;
 import com.spt.cctest.datasource.model.CreditCardEntity;
 
-public interface CreditCardComponent {
+public interface CreditCardService {
     CreditCard createCreditCard(CreditCard creditCard);
-    List<CreditCard> getAllCrediCards();
+    List<CreditCard> getAllCreditCards();
 }

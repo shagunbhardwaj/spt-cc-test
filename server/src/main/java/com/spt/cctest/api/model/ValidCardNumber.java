@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @Constraint(validatedBy = { ValidCardNumberValidator.class })
 @Documented
 public @interface ValidCardNumber {
-    String message() default "card number must be valid";
+    String message() default "card number must be valid with length 11 - 19 digits";
 
     Class<?>[] groups() default { };
 
